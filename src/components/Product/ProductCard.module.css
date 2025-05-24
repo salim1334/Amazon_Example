@@ -7,6 +7,11 @@
   flex-direction: column;
 }
 
+.product_container.product_flexed {
+  min-width: 400px;
+  border-bottom: none;
+}
+
 .product_image_container {
   display: flex;
   justify-content: center;
@@ -50,4 +55,26 @@
 
 .product_quantity_container {
   margin-bottom: 10px;
+}
+
+.productDescription {
+  padding: 20px;
+  border-left: 1px solid rgb(231, 231, 231);
+  max-width: 700px;
+  margin-top: 20px;
+}
+
+.descriptionTitle {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .product_container.product_flexed {
+    border-right: none;
+    margin: auto;
+    min-width: 200px;
+    width: 100%;
+  }
 }

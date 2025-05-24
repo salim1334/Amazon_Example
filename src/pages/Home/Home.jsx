@@ -1,16 +1,15 @@
 import CarouselEffect from "../../components/CarouselEffect/CarouselEffect"
 import Category from "../../components/Category/Category"
-import Header from "../../components/Header/Header"
 import Product from "../../components/Product/Product"
+import LayOut from '../../components/LayOut/LayOut';
 
 function Home() {
   return (
-    <div>
-      <Header />
+    <LayOut>
       <CarouselEffect />
       <Category />
       <Product />
-    </div>
+    </LayOut>
   )
 }
 

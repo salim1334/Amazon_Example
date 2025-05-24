@@ -1,11 +1,13 @@
 .category__container {
-  margin: 0 3%;
+  margin: 0 4%;
   position: relative;
-  margin-top: -10%;
   display: grid;
+  gap: 1.5rem;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  padding: 1rem 0;
+  padding: 1.5rem 5%;
+  max-width: 1400px;
+  margin: auto;
+  margin-top: -15%;
 }
 
 .category {
@@ -14,7 +16,7 @@
   aspect-ratio: 1/ 1.2;  
   background-color: #fff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -75,10 +77,12 @@
 
 @media (max-width: 768px) {
   .category__container {
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-  margin: 0 4%;
-}
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin: 0 4%;
+    padding: 1.5rem 0;
+    margin-top: -10%;
+  }
 
   .category {
     aspect-ratio: 1 / 1.3;
