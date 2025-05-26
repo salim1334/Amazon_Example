@@ -3,17 +3,32 @@ import styles from './ProductCard.module.css';
 import CurrencyFormat from '../CurrencyFormat/CurrencyFormat';
 import { Link } from 'react-router-dom';
 import Category from '../Category/Category';
+import { useContext } from 'react';
+import { DataContext } from '../Context/Context';
+import { Type } from '../../Utility/action.type';
+
 
 function ProductCard({
   product: { image, title, price, rating, id, category, description },
   detail,
+  notDisplayAdd,
+  cart,
 }) {
+  const [state, dispatch] = useContext(DataContext);
+
+  function handleAddToCart() {
+    dispatch({
+      type: Type.ADD_TO_CART,
+      item: { image, title, price, rating, id, category, description },
+    });
+  }
+
   return (
     <>
       <div
         className={`${styles.product_container} ${
           detail ? styles.product_flexed : ''
-        }`}
+        } ${cart ? styles.product_cart : ''}`}
       >
         <Link to={`/products/${id}`}>
           <div className={styles.product_image_container}>
@@ -60,9 +75,16 @@ function ProductCard({
           <img src="" alt="" />
         </div>
 
-        <button className={`${styles.add_to_cart_button}  button_primary`}>
-          Add to Cart
-        </button>
+        {notDisplayAdd ? (
+          ''
+        ) : (
+          <button
+            className={`${styles.add_to_cart_button}  button_primary`}
+            onClick={handleAddToCart}
+          >
+            Add to Cart
+          </button>
+        )}
       </div>
       {detail && (
         <div className={styles.productDescription}>
@@ -77,4 +99,4 @@ function ProductCard({
   );
 }
 
-export default ProductCard
+export default ProductCard;

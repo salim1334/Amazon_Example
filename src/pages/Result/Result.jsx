@@ -5,17 +5,26 @@ import { productUrl } from '../../Api/endPoints';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProductCard from '../../components/Product/ProductCard';
+import Loader from '../../components/Loader/Loader';
 
 function Result() {
   const { category } = useParams();
   const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const formatted = category.toLocaleLowerCase();
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(`${productUrl}/products/category/${formatted}`)
-      .then((res) => setResults(res.data))
-      .catch(err => console.error(`Error on fetching product ${err}`))
+      .then((res) => {
+        setResults(res.data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error(`Error on fetching product ${err}`);
+        setIsLoading(false);
+      })
   }, []);
 
   return (
@@ -25,11 +34,15 @@ function Result() {
         <p>Category / {category}</p>
         <hr />
 
-        <div className={styles.products__container}>
-          {results?.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className={styles.products__container}>
+            {results?.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
       </section>
     </LayOut>
   );

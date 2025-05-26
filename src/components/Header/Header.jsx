@@ -6,11 +6,16 @@ import { BsSearch } from 'react-icons/bs';
 import cartIcon from '../../assets/cart-icon.png';
 import LowerHeader from './LowerHeader';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { DataContext } from '../Context/Context';
 
 function Header() {
+  const [{ cart }, dispatch] = useContext(DataContext);
+  const totalItem = cart?.reduce((amount, item) => item.quantity + amount, 0)
+
   return (
     <>
-      <nav>
+      <nav className={styles.upper_Header_wrapper}>
         <div className={styles.header__container}>
           <div className={styles.logo__container}>
             <div className={styles.logo__wrapper}>
@@ -80,7 +85,7 @@ function Header() {
                 className={styles.icon}
                 width="40px"
               />
-              <span className={styles.cart__count}>0</span>
+              <span className={styles.cart__count}>{totalItem}</span>
               <span className={styles.cart__label}>Cart</span>
             </Link>
           </div>
