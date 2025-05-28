@@ -8,10 +8,14 @@ import LowerHeader from './LowerHeader';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { DataContext } from '../Context/Context';
+import { auth } from '../../../firebase/firebase';
 
 function Header() {
-  const [{ cart }, dispatch] = useContext(DataContext);
-  const totalItem = cart?.reduce((amount, item) => item.quantity + amount, 0)
+  const [{ cart, user }, dispatch] = useContext(DataContext);
+
+  const totalItem = cart?.reduce((amount, item) => item.quantity + amount, 0);
+
+  const userFirstName = user?.displayName.split(' ')[0].charAt(0).toUpperCase() + user?.displayName.split(' ')[0].slice(1).toLowerCase()
 
   return (
     <>
@@ -68,9 +72,18 @@ function Header() {
               </select>
             </Link>
 
-            <Link to="/auth" className={styles.account}>
-              <p className={styles.label}>Hello, sign in</p>
-              <span className={styles.bold}>Account & Lists</span>
+            <Link to={!user && '/auth'} className={styles.account}>
+              {user ? (
+                <>
+                  <p className={styles.label}>Hello, {userFirstName}</p>
+                  <span className={styles.bold} onClick={() => auth.signOut()}>Sign Out</span>
+                </>
+              ) : (
+                <>
+                  <p className={styles.label}>Hello, sign in</p>
+                  <span className={styles.bold}>Account & Lists</span>
+                </>
+              )}
             </Link>
 
             <Link to="/orders" className={styles.orders}>

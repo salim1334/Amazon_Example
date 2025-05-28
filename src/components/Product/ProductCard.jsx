@@ -7,7 +7,6 @@ import { useContext } from 'react';
 import { DataContext } from '../Context/Context';
 import { Type } from '../../Utility/action.type';
 
-
 function ProductCard({
   product: { image, title, price, rating, id, category, description },
   detail,

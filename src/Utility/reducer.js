@@ -43,6 +43,12 @@ function reducer(state, action) {
         ...state,
         cart: newCart
       }
+    
+    case Type.SET_USER:
+      return {
+        ...state,
+        user: action.user
+      }
       
     default:
       throw new Error('Unknown Action');
