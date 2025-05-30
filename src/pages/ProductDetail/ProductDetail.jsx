@@ -18,6 +18,7 @@ function ProductDetail() {
       .get(`${productUrl}/products/${id}`)
       .then((res) => {
         setProduct(res.data);
+        
         setIsLoading(false);
       })
       .catch(err => {
@@ -25,7 +26,6 @@ function ProductDetail() {
         setIsLoading(false);
       })
   }, []);
-
   return (
     <LayOut>
       <div className={styles.product_detail_header}>
